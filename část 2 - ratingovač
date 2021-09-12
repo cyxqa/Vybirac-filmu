@@ -1,0 +1,14 @@
+import re
+import requests
+from bs4 import BeautifulSoup
+
+page = requests.get("https://www.imdb.com/title/tt0126029/?ref_=fn_al_tt_1")
+print(page)
+soup = BeautifulSoup(page.content, 'html.parser')
+scrape = soup.find_all('span', class_='AggregateRatingButton__RatingScore-sc-1ll29m0-1 iTLWoV')
+print(scrape)
+
+regex = re.compile(r'\d\.\d')
+mo = regex.search(str(scrape))
+print(mo.group())
+
